@@ -1,3 +1,21 @@
-= project_milestones
+= Вехи (плагин для Redmine)
 
-Description goes here
+Плагин позволяет создавать вехи проекта (по сути, специальные задачи). Вехи-задачи автоматически закрываются, если все задачи, от которых зависит веха -- закрыты.
+
+Дата начала вехи -- это планируемая дата ее выполнения. Дата выполнения -- это фактическая дата выполнения вехи, которая вычисляется как максимальная дата выполнения подчиненных задач (при каждом изменении подчиненных задач).
+
+= Project milestones (plugin for Redmine)
+
+The plugin allow to create milestones (special issues) in project. Milestones-issues will be auto-closed if all conditions is fuilfiled.
+
+== Installation
+
+  cd vendor/plugins
+  git clone git://github.com/rubynovich/redmine_project_milestones.git
+  cd ../..
+  rake db:migrate:plugin NAME=redmine_project_milestones RAILS_ENV=production
+  
+== Update
+
+  cd vendor/plugins/redmine_project_milestones
+  git pull
