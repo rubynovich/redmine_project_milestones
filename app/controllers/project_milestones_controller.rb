@@ -1,9 +1,9 @@
 class ProjectMilestonesController < ApplicationController
   unloadable
 
-  before_filter :new_project_milestone, :only => [:new, :index, :create] 
-  before_filter :find_project_milestone, :only => [:edit, :update, :destroy]
-  before_filter :find_project, :only => [:new, :index, :create]
+  before_filter :new_project_milestone, :only => [:new, :index, :create, :find_issues] 
+  before_filter :find_project_milestone, :only => [:edit, :update, :destroy, :find_issues]
+  before_filter :find_project, :only => [:new, :index, :create, :find_issues]
   before_filter :find_issues, :only => [:new, :edit]
   before_filter :require_project_milestones_manager
   
@@ -55,6 +55,11 @@ class ProjectMilestonesController < ApplicationController
       render_404
     end
 
+    def find_issues
+      @issues = Issue.visible.open.for_project(@project.id).all
+      @issues -= @project_milestone.issue
+    end
+    
     def new_project_milestone
       @project_milestone = ProjectMilestone.new(params[:project_milestone])
     end
