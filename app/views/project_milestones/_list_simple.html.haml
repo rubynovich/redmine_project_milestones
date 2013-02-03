@@ -1,0 +1,36 @@
+- if issues && issues.any?
+  - form_tag({}) do
+    %table.list.issues
+      %thead
+        %tr
+          %th= "#"
+          %th=l(:field_subject)
+          %th=l(:field_status)
+          %th=l(:field_author)
+          %th=l(:field_assigned_to)
+          %th=l(:field_start_date)
+          %th=l(:field_due_date)
+          %th=l(:field_updated_on)
+      %tbody
+        - issues.each do |issue|
+          %tr.hascontextmenu{:id => "issue-#{h(issue.id)}", :class => [cycle('odd', 'even'), issue.css_classes].join(" ")}
+            %td.id
+              = check_box_tag("ids[]", issue.id, false, :style => 'display:none;', :id => nil)
+              = link_to(h(issue.id), {:controller => 'issues', :action => 'show', :id => issue}, {:title => issue.tracker})
+            %td.subject
+              = link_to h(truncate(issue.subject, :length => 60)), {:controller => 'issues', :action => 'show', :id => issue}, :title => issue.tracker
+            %td.status
+              = h issue.status
+            %td
+              = link_to_user(issue.author)
+            %td
+              = link_to_user(issue.assigned_to)
+            %td
+              = format_date(issue.start_date)
+            %td
+              = format_date(issue.due_date)
+            %td
+              = format_date(issue.updated_on)              
+- else
+  %p.nodata
+    = l(:label_no_data)

@@ -1,0 +1,31 @@
+.contextual
+  = link_to l(:button_add), {:action => 'new', :project_id=> @project}, :class => 'icon icon-add'
+  = link_to l(:button_update), {:action => 'edit', :id => @project_milestone.id, :project_id=> @project}, :class => 'icon icon-edit'
+  = link_to l(:button_delete), project_milestone_path(@project_milestone), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+
+%h2
+  = link_to l(:label_project_milestone_plural), :action => :index, :project_id => @project
+  &#187; 
+  = link_to_issue @project_milestone.issue
+
+.issue.details  
+  %table.attributes
+    %tr
+      %th= l(:field_start_date)+":"
+      %td= format_date(@project_milestone.issue.start_date)
+      %th= l(:field_due_date)+":"
+      %td= format_date(@project_milestone.issue.due_date)
+          
+  - if @project_milestone.description?
+    %hr
+    - if @project_milestone.description?
+      %p
+        %strong= l(:field_description)
+      .wiki= textilizable @project_milestone, :description
+
+= render :partial => "list_simple", :locals => {:issues => @project_milestone.issues}
+
+- if @journals.present?
+  #history
+    %h3=l(:label_history)
+    = render :partial => "issues/history", :locals => {:issue => @project_milestone.issue, :journals => @journals}

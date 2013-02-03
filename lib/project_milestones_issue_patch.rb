@@ -39,9 +39,12 @@ module ProjectMilestonesPlugin
     module InstanceMethods
       def recalculate_due_date
         milestone_issue = self.project_milestone.issue
+        milestone_issue.init_journal(User.current, ::I18n.t('message_project_milestone_issue_delayed', 
+          :issue => "##{self.id}",
+          :start_date => format_date(milestone_issue.due_date),
+          :due_date => format_date(self.due_date)))
         milestone_issue.due_date = self.due_date
-        milestone_issue.current_journal.notes = "##{self.id}" #FIXME 
-        milestone_issue.save      
+        milestone_issue.save
       end
     end
   end

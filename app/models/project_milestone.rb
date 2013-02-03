@@ -3,10 +3,11 @@ class ProjectMilestone < ActiveRecord::Base
   
   belongs_to :issue, :dependent => :destroy
   belongs_to :project
+  belongs_to :tracker
   has_many :issues
   
   validates_presence_of :subject
-  validates_uniqueness_of :issue_id
+  #validates_uniqueness_of :issue_id
 
   if Rails::VERSION::MAJOR < 3
     named_scope :for_project, lambda{ |project_id| 

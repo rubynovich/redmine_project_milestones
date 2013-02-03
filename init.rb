@@ -12,7 +12,7 @@ Redmine::Plugin.register :redmine_project_milestones do
     permission :manage_milestones, :project_milestones => [:index], :public => true
   end
   
-  menu :project_menu, :project_milestones, {:controller => :project_milestones, :action => :index}, :caption => :label_milestones, :param => :project_id, :if => Proc.new{ true }, :require => :member #FIXME
+  menu :project_menu, :project_milestones, {:controller => :project_milestones, :action => :index}, :caption => :label_project_milestone_plural, :param => :project_id, :if => Proc.new{ true }, :require => :member #FIXME
 end
 
 if Rails::VERSION::MAJOR < 3

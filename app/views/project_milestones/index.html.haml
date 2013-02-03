@@ -1,0 +1,32 @@
+.contextual
+  = link_to l(:button_add), {:action => :new, :project_id => @project}, :class => 'icon icon-add'
+
+%h2=l(:label_project_milestone_plural)
+
+- if @project_milestones.any?
+  %table.list
+    %thead
+      %tr
+        %th=l(:field_issue)
+        %th=l(:label_issue_plural)
+        %th=l(:field_start_date)
+        %th=l(:field_due_date)
+        %th=l(:label_latency)
+        %th
+    %tbody
+      - @project_milestones.each do |project_milestone|
+        %tr{:class=>cycle("odd", "even")}
+          %td= link_to_issue project_milestone.issue
+          %td= textilizable(project_milestone.issues.map{|i| "##{i.id}" }.join(", "))
+          %td= format_date(project_milestone.issue.start_date)
+          %td= format_date(project_milestone.issue.due_date)
+          %td= distance_of_time_in_words(project_milestone.issue.start_date, project_milestone.issue.due_date)
+          %td.buttons
+            = link_to l(:button_show), {:action => 'show', :id => project_milestone.id, :project_id => @project}, :class => 'icon icon-details'  
+            = link_to l(:button_update), {:action => 'edit', :id => project_milestone.id, :project_id => @project}, :class => 'icon icon-edit'        
+            = link_to(l(:button_delete), project_milestone_path(project_milestone), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
+- else
+  %p.nodata
+    = l(:label_no_data)
+
+- html_title(l(:label_project_milestone_plural))

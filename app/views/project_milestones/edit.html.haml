@@ -1,0 +1,12 @@
+.contextual
+  = link_to l(:button_delete), project_milestone_path(@project_milestone), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del'
+
+%h2
+  = link_to l(:label_project_milestone_plural), :action => :index, :project_id => @project
+  &#187; 
+  =link_to_issue @project_milestone.issue
+
+- labelled_form_for @project_milestone do |f|
+  = render :partial => 'form', :locals => {:f => f}
+  = submit_tag l(:button_save)
+
