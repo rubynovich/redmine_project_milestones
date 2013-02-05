@@ -4,6 +4,8 @@
 
 Дата начала вехи -- это планируемая дата ее выполнения. Дата выполнения -- это фактическая дата выполнения вехи, которая вычисляется как максимальная дата выполнения подчиненных задач (при каждом изменении подчиненных задач).
 
+После настройки модуля необходимо настроить статус закрытия. Делается это в Администрирование -> Модули -> Вехи -> Параметры
+
 = Project milestones (plugin for Redmine)
 
 The plugin allow to create milestones (special issues) in project. Milestones-issues will be auto-closed if all conditions is fuilfiled.
@@ -14,7 +16,7 @@ The plugin allow to create milestones (special issues) in project. Milestones-is
   git clone git://github.com/rubynovich/redmine_project_milestones.git
   cd ../..
   rake db:migrate:plugin NAME=redmine_project_milestones RAILS_ENV=production
-  
+
 == Update
 
   cd vendor/plugins/redmine_project_milestones

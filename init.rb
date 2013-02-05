@@ -7,12 +7,17 @@ Redmine::Plugin.register :redmine_project_milestones do
   version '0.0.1'
   url 'https://github.com/rubynovich/redmine_project_milestones'
   author_url 'http://roman.shipiev.me'
-  
-  project_module :project_milestones do  
+
+  project_module :project_milestones do
     permission :manage_milestones, :project_milestones => [:index], :public => true
   end
-  
+
   menu :project_menu, :project_milestones, {:controller => :project_milestones, :action => :index}, :caption => :label_project_milestone_plural, :param => :project_id, :if => Proc.new{ true }, :require => :member #FIXME
+
+  settings :default => {
+                         :issue_status => IssueStatus.first(:conditions => {:is_closed => true}).id
+                       },
+           :partial => 'project_milestones/settings'
 end
 
 if Rails::VERSION::MAJOR < 3
@@ -27,10 +32,9 @@ object_to_prepare.to_prepare do
     require "project_milestones_#{cl}_patch"
   end
 
-  [ 
+  [
     [Issue, ProjectMilestonesPlugin::IssuePatch]
   ].each do |cl, patch|
     cl.send(:include, patch) unless cl.included_modules.include? patch
   end
 end
-

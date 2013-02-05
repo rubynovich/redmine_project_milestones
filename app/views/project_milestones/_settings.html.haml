@@ -1,0 +1,3 @@
+%p
+  = content_tag(:label, l(:label_issue_status))
+  = select_tag("settings[issue_status]", options_from_collection_for_select(IssueStatus.all, :id, :name, @settings[:issue_status] && @settings[:issue_status].to_i || IssueStatus.first(:conditions => {:is_closed => true})))
