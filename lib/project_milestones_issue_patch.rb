@@ -1,6 +1,7 @@
 require_dependency 'principal'
 require_dependency 'user'
 require_dependency 'issue'
+require_dependency 'issue_status'
 
 module ProjectMilestonesPlugin
   module IssuePatch
@@ -12,7 +13,8 @@ module ProjectMilestonesPlugin
       base.class_eval do
         belongs_to :project_milestone
 
-        after_save :recalculate_due_date, :if => "self.project_milestone.present? && self.project_milestone.issue.present? && (self.project_milestone.issue.due_date < self.due_date)"
+        after_save :recalculate_due_date, :if => "self.project_milestone && self.project_milestone.issue && (self.project_milestone.issue.due_date < self.due_date)"
+        after_save :close_milestone_issue, :if => "self.project_milestone && self.project_milestone.issue && self.closed? && !self.project_milestone.issue.closed?"
 
         if Rails::VERSION::MAJOR < 3
           named_scope :for_project, lambda{ |project_id|
@@ -47,6 +49,15 @@ module ProjectMilestonesPlugin
           :due_date => format_date(self.due_date)))
         milestone_issue.due_date = self.due_date
         milestone_issue.save
+      end
+
+      def close_milestone_issue
+        if self.project_milestone.issues.all?{ |issue| issue.closed? }
+          milestone_issue = self.milestone_issue.issue
+          milestone_issue.init_journal(User.current, "All issues is closed") #FIXME need ::I18n.t
+          milestone_issue.status = IssueStatus.all(:conditions => {:is_closed => true}).last #FIXME from Setting
+          milestone_issue.save
+        end
       end
     end
   end
