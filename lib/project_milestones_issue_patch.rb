@@ -53,8 +53,8 @@ module ProjectMilestonesPlugin
 
       def close_milestone_issue
         if self.project_milestone.issues.all?{ |issue| issue.closed? }
-          milestone_issue = self.milestone_issue.issue
-          milestone_issue.init_journal(User.current, "All issues is closed") #FIXME need ::I18n.t
+          milestone_issue = self.project_milestone.issue
+          milestone_issue.init_journal(User.current, ::I18n.t('message_project_milestone_issue_is_closed'))
           milestone_issue.status = IssueStatus.all(:conditions => {:is_closed => true}).last #FIXME from Setting
           milestone_issue.save
         end

@@ -1,8 +1,10 @@
 # Russian strings go here for Rails i18n
 ru:
+  project_module_project_milestones: "Вехи"
   label_project_milestone: "Веха"
   label_project_milestone_plural: "Вехи"
   label_project_milestone_new: "Добавление новой вехи"
   label_latency: "Опоздание"
   message_project_milestone_issue_delayed: "Перенос сроков выполнения задачи %{issue} привел к смещению сроков выполнения вехи с %{start_date} на %{due_date}"
   message_project_milestone_update_delayed: "Добавление задачи %{issue} привело к смещению сроков выполнения вехи с %{start_date} на %{due_date}"
+  message_project_milestone_issue_is_closed: "Веха выполнена, так как все задачи выхи закрыты"
