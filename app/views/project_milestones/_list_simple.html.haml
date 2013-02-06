@@ -11,6 +11,7 @@
           %th=l(:field_start_date)
           %th=l(:field_due_date)
           %th=l(:field_updated_on)
+          %th
       %tbody
         - issues.each do |issue|
           %tr.hascontextmenu{:id => "issue-#{h(issue.id)}", :class => [cycle('odd', 'even'), issue.css_classes].join(" ")}
@@ -30,7 +31,10 @@
             %td
               = format_date(issue.due_date)
             %td
-              = format_date(issue.updated_on)              
+              = format_date(issue.updated_on)
+            %td
+              = link_to l(:button_update), edit_milestone_issue_path(issue), :class => 'icon icon-edit'
+              = link_to(l(:button_delete), milestone_issue_path(issue, :back_url => url_for(params)), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 - else
   %p.nodata
     = l(:label_no_data)

@@ -1,0 +1,9 @@
+.box.tabular
+  -#= hidden_field_tag :project_id, @project.id
+  -#= back_url_hidden_field_tag
+
+  - @project_milestones.each do |milestone|
+    %p
+      = radio_button_tag "project_milestone_id", milestone.id, milestone.issues.include?(@issue)
+      = milestone.subject
+      = link_to "(##{milestone.issue.id})", project_milestone_path(milestone), :title => milestone.issue.subject

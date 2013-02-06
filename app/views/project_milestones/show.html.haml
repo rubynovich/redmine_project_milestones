@@ -5,17 +5,19 @@
 
 %h2
   = link_to l(:label_project_milestone_plural), :action => :index, :project_id => @project
-  &#187; 
-  = link_to_issue @project_milestone.issue
+  &#187;
+  = @project_milestone.subject
+  &#187;
+  = link_to_issue @project_milestone.issue, :subject => false
 
-.issue.details  
+.issue.details
   %table.attributes
     %tr
       %th= l(:field_start_date)+":"
       %td= format_date(@project_milestone.issue.start_date)
       %th= l(:field_due_date)+":"
       %td= format_date(@project_milestone.issue.due_date)
-          
+
   - if @project_milestone.description?
     %hr
     - if @project_milestone.description?
