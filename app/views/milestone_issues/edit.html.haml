@@ -4,7 +4,8 @@
 %h2
   = link_to l(:label_project_milestone_plural), :controller=> :project_milestones, :action => :index, :project_id => @project
   &#187;
-  =l(:label_milestone_issue_edit, :issue => link_to("##{@issue.id}", issue_path(@issue), :title => @issue.subject))
+  = l(:label_milestone_issue_edit)
+  = link_to("##{@issue.id}", issue_path(@issue), :title => @issue.subject)
 
 %form{:action => url_for(:action => :update, :id => @issue.id), :method => :put}
   = render :partial => 'form'
