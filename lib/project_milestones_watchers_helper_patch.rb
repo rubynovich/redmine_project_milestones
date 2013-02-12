@@ -24,7 +24,7 @@ module ProjectMilestonesPlugin
                 {:action => :new, :controller => :milestone_issues, :issue_id => object.id, :project_id => object.project_id},
                 {:class => "icon icon-add"})
             end
-          end].join(" ")
+          end].join(" ").html_safe
         else
           watcher_tag_without_milestone_issues(object, user, options)
         end
