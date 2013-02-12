@@ -6,7 +6,7 @@
   &#187;
   =l(:label_milestone_issue_edit, :issue => link_to("##{@issue.id}", issue_path(@issue), :title => @issue.subject))
 
-- form_tag({:action => :update, :id => @issue.id}, :method => :put) do
+%form{:action => url_for(:action => :update, :id => @issue.id), :method => :put}
   = render :partial => 'form'
   = submit_tag l(:button_save)
-  = link_to l(:button_cancel), issue_path(@issue)  
+  = link_to l(:button_cancel), issue_path(@issue)

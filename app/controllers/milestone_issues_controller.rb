@@ -51,8 +51,8 @@ class MilestoneIssuesController < ApplicationController
     end
 
     def all_project_milestones
-      find_project unless @project
-      @project_milestones = ProjectMilestone.for_project(@project.id).all(:order => :subject)
+      find_issue unless @issue && @project
+      @project_milestones = ProjectMilestone.for_project(@project.id).exclude_issue(@issue.id).all(:order => :subject)
     end
 
     def find_issue

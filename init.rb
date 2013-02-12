@@ -1,9 +1,9 @@
 require 'redmine'
 
 Redmine::Plugin.register :redmine_project_milestones do
-  name 'Вехи'
+  name 'Project milestones'
   author 'Roman Shipiev'
-  description 'Плагин позволяет создавать вехи проекта (по сути, специальные задачи). Вехи-задачи автоматически закрываются, если все задачи, от которых зависит веха -- закрыты.'
+  description 'The plugin allows create project milestones (special issues). Project milestones autoclose when all milestone-issues were closed'
   version '0.0.1'
   url 'https://github.com/rubynovich/redmine_project_milestones'
   author_url 'http://roman.shipiev.me'

@@ -3,10 +3,10 @@
 
 %h2
   = link_to l(:label_project_milestone_plural), :action => :index, :project_id => @project
-  &#187; 
+  &#187;
   =link_to_issue @project_milestone.issue
 
-- labelled_form_for @project_milestone do |f|
+- form = labelled_form_for @project_milestone do |f|
   = render :partial => 'form', :locals => {:f => f}
   = submit_tag l(:button_save)
-
+= form if Rails::VERSION::MAJOR >= 3
