@@ -17,13 +17,13 @@
       - @project_milestones.each do |project_milestone|
         %tr{:class=>cycle("odd", "even")}
           %td= link_to_issue project_milestone.issue
-          %td= textilizable(project_milestone.issues.map{|i| "##{i.id}" }.join(", "))
-          %td= format_date(project_milestone.issue.start_date)
-          %td= format_date(project_milestone.issue.due_date)
-          %td= distance_of_time_in_words(project_milestone.issue.start_date, project_milestone.issue.due_date)
+          %td{:align => :center}= textilizable(project_milestone.issues.map{|i| "##{i.id}" }.join(", "))
+          %td{:align => :center}= format_date(project_milestone.issue.start_date)
+          %td{:align => :center}= format_date(project_milestone.issue.due_date)
+          %td{:align => :center}= distance_of_time_in_words(project_milestone.issue.start_date, project_milestone.issue.due_date)
           %td.buttons
-            = link_to l(:button_show), {:action => 'show', :id => project_milestone.id, :project_id => @project}, :class => 'icon icon-details'  
-            = link_to l(:button_update), {:action => 'edit', :id => project_milestone.id, :project_id => @project}, :class => 'icon icon-edit'        
+            = link_to l(:button_show), {:action => 'show', :id => project_milestone.id, :project_id => @project}, :class => 'icon icon-details'
+            = link_to l(:button_update), {:action => 'edit', :id => project_milestone.id, :project_id => @project}, :class => 'icon icon-edit'
             = link_to(l(:button_delete), project_milestone_path(project_milestone), :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon icon-del')
 - else
   %p.nodata
