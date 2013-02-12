@@ -1,3 +1,17 @@
 # English strings go here for Rails i18n
 en:
-  my_label: "My label"
+  project_module_project_milestones: "Project milestones"
+  permission_manage_milestones: "Manage project milestones"
+  label_project_milestone: "Project milestone"
+  label_project_milestone_plural: "Project milestones"
+  label_project_milestone_new: "New project milestone"
+  label_milestone_issue_new: "Attach issue %{issue} to project milestone"
+  label_milestone_issue_edit: "Change project milestone for issue %{issue}"
+  label_latency: "Latency"
+  button_milestone_issue_edit: "Change project milestone"
+  button_milestone_issue_new: "Attach to project milestone"
+  notice_no_project_milestone_selected: "Project milestone for attach did't select"
+  message_project_milestone_issue_delayed: "Project milestone delayed from %{start_date} to %{due_date} because issue %{issue} delayed, too"
+  message_project_milestone_update_delayed: "Project milestone delayed from %{start_date} to %{due_date} because issue %{issue} added"
+  message_project_milestone_issue_is_closed: "Project milestone are close because all issues closed"
+  message_project_milestone_issue_reopened: "Project milestone are open, again, because one issue opened"
